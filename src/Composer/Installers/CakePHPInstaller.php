@@ -4,7 +4,7 @@ namespace Composer\Installers;
 class CakePHPInstaller extends BaseInstaller
 {
     protected $locations = array(
-        'plugin' => 'Plugin/{$name}/',
+        'plugin' => 'app/Plugin/{$name}/',
     );
 
     /**
@@ -12,6 +12,7 @@ class CakePHPInstaller extends BaseInstaller
      */
     public function inflectPackageVars($vars)
     {
+        $vars['name'] = str_replace('cakephp-plugin-', '', $vars['name']);
         $vars['name'] = strtolower(preg_replace('/(?<=\\w)([A-Z])/', '_\\1', $vars['name']));
         $vars['name'] = str_replace(array('-', '_'), ' ', $vars['name']);
         $vars['name'] = str_replace(' ', '', ucwords($vars['name']));
